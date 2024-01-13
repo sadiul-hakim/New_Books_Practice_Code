@@ -1,6 +1,7 @@
 package com.spring_security_in_action.controller;
 
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
+import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,8 +30,8 @@ public class SampleController {
         ExecutorService service = Executors.newCachedThreadPool();
         try{
 
-            var contextTask = new DelegatingSecurityContextCallable<>(task);
-            String result = service.submit(contextTask).get();
+            service = new DelegatingSecurityContextExecutorService(service);
+            String result = service.submit(task).get();
             System.out.println(result);
         }catch (Exception ex){
             ex.printStackTrace();

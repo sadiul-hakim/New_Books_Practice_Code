@@ -15,10 +15,14 @@ public class ProjectConfig {
     public UserDetailsService userDetailsService(){
         UserDetails hakim = User.withUsername("Hakim")
                 .password(passwordEncoder().encode("hakim@123"))
-                .authorities("READ")
+                .authorities("READ","WRITE")
+                .build();
+        UserDetails ashik = User.withUsername("Ashik")
+                .password(passwordEncoder().encode("hakim@123"))
+                .authorities("READ","WRITE")
                 .build();
 
-        return new InMemoryUserDetailsManager(hakim);
+        return new InMemoryUserDetailsManager(hakim,ashik);
     }
 
     @Bean

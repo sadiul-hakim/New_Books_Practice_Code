@@ -1,3 +1,2 @@
-# Token Based Authentication
+# No DB Basic Auth
 
-In the Branch i added token based authentication to my service.

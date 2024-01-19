@@ -19,7 +19,7 @@ public class AppConfig {
                     basic.realmName("OTHER");
                     basic.authenticationEntryPoint(new AuthenticationFailurePoint());
                 })
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.anyRequest().hasAuthority("WRITE"))
                 .authenticationProvider(authenticationProvider)
                 .build();
     }

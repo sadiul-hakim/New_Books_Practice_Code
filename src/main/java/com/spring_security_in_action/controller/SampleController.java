@@ -1,5 +1,6 @@
 package com.spring_security_in_action.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
 import org.springframework.security.concurrent.DelegatingSecurityContextExecutor;
 import org.springframework.security.concurrent.DelegatingSecurityContextExecutorService;
@@ -18,7 +19,7 @@ import java.util.logging.Logger;
 public class SampleController {
     Logger logger = Logger.getLogger(SampleController.class.getName());
     @GetMapping("/hello")
-    public void hello(){
+    public ResponseEntity<?> hello(){
         Callable<String> task = () -> {
             try{
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -42,5 +43,7 @@ public class SampleController {
         }
 
         service.shutdown();
+
+        return ResponseEntity.ok("Hello");
     }
 }

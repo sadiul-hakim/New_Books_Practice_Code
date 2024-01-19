@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 @Configuration
 @EnableAsync
-public class AsyncConfig {
+public class SecurityContextConfig {
 
     @Bean
     public InitializingBean initializingBean(){

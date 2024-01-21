@@ -15,11 +15,11 @@ public class ProjectConfig {
     public UserDetailsService userDetailsService(){
         UserDetails hakim = User.withUsername("Hakim")
                 .password(passwordEncoder().encode("hakim@123"))
-                .authorities("READ","WRITE")
+                .authorities("ROLE_ADMIN")
                 .build();
         UserDetails ashik = User.withUsername("Ashik")
                 .password(passwordEncoder().encode("hakim@123"))
-                .authorities("READ")
+                .authorities("ROLE_MANAGER")
                 .build();
 
         return new InMemoryUserDetailsManager(hakim,ashik);

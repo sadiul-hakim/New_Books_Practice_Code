@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+    <h1 style="background: navy;color: white;text-align: center;padding: 10px;">Welcome Home</h1>
+
+    <fieldset style="width: 200px">
+        <legend>Name Field</legend>
+        <form action="/product/add" method="post" style="width: 200px">
+            <label for="name">Name</label><br/>
+            <input type="text" name="name" id="name"/><br/>
+            <input type="submit" value="Add"/><br/>
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        </form>
+    </fieldset>
+</body>
+</html>

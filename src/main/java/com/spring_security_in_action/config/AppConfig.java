@@ -10,18 +10,22 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 @Configuration
 @RequiredArgsConstructor
 public class AppConfig {
     private final AuthenticationProvider authenticationProvider;
     private final CustomCsrfTokenRepository csrfTokenRepository;
+    private final CorsConfigurationSource corsConfigurationSource;
 
     @Bean
     public SecurityFilterChain config(HttpSecurity http) throws Exception {
         return http.csrf(c -> {
                     c.csrfTokenRepository(csrfTokenRepository);
                     c.csrfTokenRequestHandler(new CsrfTokenRequestAttributeHandler());
+                }).cors(cors->{
+                    cors.configurationSource(corsConfigurationSource);
                 }).httpBasic(basic -> {
                     basic.realmName("OTHER");
                     basic.authenticationEntryPoint(new AuthenticationFailurePoint());

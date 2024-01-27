@@ -25,6 +25,7 @@ public class CustomCsrfTokenRepository implements CsrfTokenRepository {
     public void saveToken(CsrfToken token, HttpServletRequest request, HttpServletResponse response) {
 
         String identifier = request.getHeader("X-IDENTIFIER");
+        if(identifier.isEmpty()) return;
         Optional<CustomCsrfToken> existingToken = tokenRepository.findByIdentifier(identifier);
 
         if(existingToken.isPresent()){
@@ -41,6 +42,7 @@ public class CustomCsrfTokenRepository implements CsrfTokenRepository {
     @Override
     public CsrfToken loadToken(HttpServletRequest request) {
         String identifier = request.getHeader("X-IDENTIFIER");
+        if(identifier.isEmpty()) return null;
         Optional<CustomCsrfToken> existingToken = tokenRepository.findByIdentifier(identifier);
         return existingToken.map(customCsrfToken -> new DefaultCsrfToken("X-CSRF-TOKEN", "_csrf",
                 customCsrfToken.getToken())).orElse(null);

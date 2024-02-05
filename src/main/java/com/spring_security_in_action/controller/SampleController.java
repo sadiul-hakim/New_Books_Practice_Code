@@ -1,18 +1,19 @@
 package com.spring_security_in_action.controller;
 
+import com.spring_security_in_action.service.HelloService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
 
 @RestController
+@RequiredArgsConstructor
 public class SampleController {
+    private final HelloService helloService;
     Logger logger = Logger.getLogger(SampleController.class.getName());
     @GetMapping("/hello")
-    public ResponseEntity<?> hello(){
+    public ResponseEntity<?> hello(@RequestParam String name){
 //        Callable<String> task = () -> {
 //            try{
 //                Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -37,7 +38,7 @@ public class SampleController {
 //
 //        service.shutdown();
 
-        return ResponseEntity.ok("Hello");
+        return ResponseEntity.ok(helloService.greeting(name));
     }
 
     @GetMapping("/ohe")

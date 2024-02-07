@@ -37,11 +37,11 @@ public class AppConfig {
                     basic.realmName("OTHER");
                     basic.authenticationEntryPoint(new AuthenticationFailurePoint());
                 })
-                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
-//                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/ohe").hasRole("ADMIN"))
-//                .authorizeHttpRequests(auth -> auth.requestMatchers("/hello").hasAnyRole("MANAGER", "ADMIN"))
-//                .authorizeHttpRequests(auth -> auth.requestMatchers("/product/{code:^[0-9]*$}").authenticated())
 //                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.GET, "/ohe").hasRole("ADMIN"))
+//                .authorizeHttpRequests(auth -> auth.requestMatchers("/hello").hasAnyRole("MANAGER", "ADMIN"))
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/product/{code:^[0-9]*$}").authenticated())
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .authenticationProvider(authenticationProvider)
                 .build();
     }
